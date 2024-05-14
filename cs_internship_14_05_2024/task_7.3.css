@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+  
+  nav {
+    background-color: #3b3838;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    display: inline-block;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  nav ul li a.active {
+    background-color: #555;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .content h1 {
+    color: #333;
+  }
+  
+  .content p {
+    color: #666;
+  }
+  
