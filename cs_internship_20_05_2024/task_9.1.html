@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task_9.1</title>
+    <script>
+        function callFunction(){
+            document.getElementById("buttonID").innerHTML="the line is changed";
+        }        
+    </script>
+    <script src='task_9.1.js'></script>
+</head>
+<body>
+    <h2>
+        We can put the javascript code in the script tags and put the script tag in body or head tag. or we can put script tag in head and body both.
+    </h2>
+    <p id ="mainId">
+        This text will be changed
+    </p>
+    <p id="buttonID">
+        this line will be changed when you cick the button
+    </p>
+    <button type="button" onclick="callFunction()">
+        press me
+    </button>
+    <h2>
+        The most popular way to include javascript in html is to make another javascript file and link it with html
+    </h2>
+    <p id="Change">
+        apple
+    </p>
+    <button type="button" onclick="changeFunction()">
+        click me
+    </button>
+    <script>
+        document.getElementById("mainId").innerHTML="the text is successfully changed"
+    </script>
+    
+</body>
+</html>
