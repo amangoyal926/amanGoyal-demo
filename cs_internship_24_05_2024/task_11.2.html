@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task_11.2</title>    
+</head>
+<body>
+    <image id="id1" height=400px src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=2564&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    </image>
+    <br>
+    <button id="id2" onclick=bulbFunction()>
+        press to turn on bulb
+    </button>
+
+    <script>
+        function bulbFunction(){
+            if(document.getElementById("id1").src== "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=2564&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"){
+                document.getElementById("id1").src="https://images.unsplash.com/photo-1567177662154-dfeb4c93b6ae?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJ1bGJ8ZW58MHx8MHx8fDA%3D";
+                
+                document.getElementById("id2").innerHTML="press to turn off bulb";
+
+
+            }else{
+                document.getElementById("id1").src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=2564&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+                document.getElementById("id2").innerHTML="press to turn on bulb";
+            }
+        }
+    </script>
+</body>
+</html>

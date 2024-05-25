@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <!-- The getElementById() method returns an element with a specified value.
+    The getElementById() method returns null if the element does not exist.
+    The getElementById() method is one of the most common methods in the HTML DOM. It is used almost every time you want to read or edit an HTML element.  -->    
+    <p id="id1">sample text 1</p>
+    <script>
+        document.getElementById("id1").innerHTML="sample text 1 changed";
+    </script>
+
+    <!-- The getElementsByTagName() method returns a collection of all elements with a specified tag name.
+    The getElementsByTagName() method returns an HTMLCollection.
+    The getElementsByTagName() property is read-only. -->
+
+    <h4 id="id3"></h4>
+    <script>
+        const name= document.getElementsByTagName("h4");
+        document.getElementById("id3").innerHTML=name;
+
+    </script>
+
+    <p>
+        The tag name of all elements:
+    </p>
+
+    <p id="id2"></p>
+
+    <script>
+        const collection=document.getElementsByTagName("*");
+        let text="";
+        for(let i=0;i<collection.length;i++){
+            text+=collection[i].tagName+"<br>";
+        }
+        document.getElementById("id2").innerHTML=text;
+    </script>
+
+
+    <!-- The getElementsByClassName() method returns a collection of elements with a specified class name(s).
+    The getElementsByClassName() method returns an HTMLCollection. -->
+
+    <h3 class="myClass">
+        this line is written in h3 tag
+    </h3>
+    <script>
+        const classNameDemo = document.getElementsByClassName("myClass");
+        classNameDemo[0].innerHTML="getElementByClassName demonstraction";
+    </script>
+</body>
+</html>
