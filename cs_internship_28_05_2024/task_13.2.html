@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img1{
+            width:200px;
+        }
+    </style>
+</head>
+<body>
+    <!--When working with events in JavaScript, it's often necessary to prevent the default behavior of an element from occurring, or to prevent an event from bubbling up the event chain. This can be achieved using the event.preventDefault() and event.stopPropagation() methods.-->
+    <div id="divId">
+        <img id="myid1" class="img1" src="https://images.unsplash.com/photo-1583484963886-cfe2bff2945f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"> 
+        <img id="myid2" class="img1" src="https://images.unsplash.com/photo-1635530027421-b793c5c8d045?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">        
+    </div>
+    <a id="linkId" href="https://www.google.com">google</a>
+
+    
+
+</body>
+<script>
+    // stopPropagation() method
+    //  the event.stopPropagation() method prevents an event from bubbling up the event chain.
+    document.getElementById("myid2").addEventListener('click',function(e){
+        console.log("Image 2 clicked");
+        e.stopPropagation();
+    })
+    document.getElementById("divId").addEventListener('click',function(e){
+        console.log("Click on the Div");
+    })
+    // preventDefault() method
+    // The event.preventDefault() method prevents the default behavior of an element from happening.
+    document.getElementById("linkId").addEventListener('click',function(e){
+        console.log("clicked on google link")
+        e.preventDefault();
+    })
+</script>
+</html>
