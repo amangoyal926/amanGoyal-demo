@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task_13.3</title>
+</head>
+<body>    
+    <img id="img1" src="https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="300px">     
+    <div id="divId">
+        response
+    </div>
+
+</body>
+<script>
+    const divId=document.getElementById('divId');
+    document.getElementById("img1").addEventListener('click',function(e){        
+        divId.textContent="You clicked on the image";
+    })
+
+    document.getElementById("img1").addEventListener('contextmenu',function(e){        
+        divId.textContent="You right clicked on the image";
+    })
+
+    document.getElementById("img1").addEventListener('dblclick',function(e){        
+        divId.textContent="You double clicked on the image";
+    })
+
+    document.getElementById("img1").addEventListener('mousedown',function(e){        
+        divId.textContent="mouse button is pressed";
+    })
+
+    document.getElementById("img1").addEventListener('mouseenter',function(e){        
+        divId.textContent="mouse pointer entered in the image";
+    })
+
+    document.getElementById("img1").addEventListener('mouseleave',function(e){        
+        divId.textContent="mouse pointer moves out from the image";
+    })
+    
+    document.getElementById("img1").addEventListener('mousemove',function(e){        
+        divId.textContent="mouse pointer moves over image";
+    })
+
+    document.getElementById("img1").addEventListener('mouseout',function(e){        
+        divId.textContent="mouse pointer moves out from the image";
+    })
+
+    document.getElementById("img1").addEventListener('mouseover',function(e){        
+        divId.textContent="mouse pointer moves onto an element";
+    })
+
+    document.getElementById("img1").addEventListener('mouseup',function(e){        
+        divId.textContent="mouse button is released over the image";
+    })
+    
+
+
+</script>
+</html>
