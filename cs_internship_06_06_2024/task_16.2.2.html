@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task_16.2.2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <script>
+        new Chart("myChart",{
+            type:"doughnut",
+            data: {
+                labels: ["Italy","France","Spane","USA","Argentina"],
+                datasets:[{
+                    backgroundColor: ["pink","red","blue","yellow","gold"],
+                    data: [55,66,77,22,44]
+                }]
+            },
+            options:{
+                title:{
+                    display: true,
+                    text: "World Wide Wine Production 2018"
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
