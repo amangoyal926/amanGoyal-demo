@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task_17</title>
+    <style>
+        .mainDiv{
+            background-color:blanchedalmond;
+            display:flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainDiv">
+        <div>
+            <h1>Plan Your journey</h1>
+        </div>
+        <div>
+            <label for="source">Source:</label>
+        <select id="source">
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Varanasi">Varanasi</option>
+            <option value="Roorkee">Roorkee</option>
+            <option value="Noida">Noida</option>
+            <option value="Lucknow">Lucknow</option>
+        </select>
+        <label for="destination">Destination:</label>
+        <select id="destination">
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Varanasi">Varanasi</option>
+            <option value="Roorkee">Roorkee</option>
+            <option value="Noida">Noida</option>
+            <option value="Lucknow">Lucknow</option>
+        </select>
+        </div>
+        <br>
+        <div>
+            <button id="addJourney">Add Journey</button>
+            <button id="clearRoute">Clear Route</button>
+        </div>
+        
+        <ul id="routeList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            const sourceSelect = document.getElementById("source");
+            const destinationSelect = document.getElementById("destination");
+            const addJourneyBtn = document.getElementById('addJourney');
+            const clearRouteBtn = document.getElementById('clearRoute');
+            const routeList = document.getElementById('routeList');
+
+            let selectedRoutes=[];
+
+            addJourneyBtn.addEventListener("click",function(){
+                const sourse = sourceSelect.value;
+                const destination = destinationSelect.value;
+
+                if(sourse == destination){
+                    alert("Source and destination can't be the same");
+                    return;
+                }
+
+                if(selectedRoutes.includes(destination)){
+                    alert("Destination has been already been selected");
+                    return;                    
+                }
+
+                selectedRoutes.push(destination);
+
+                const routeItem = document.createElement('li');
+                routeItem.textContent = `From ${sourse} to ${destination}`;
+                routeList.appendChild(routeItem);
+
+            });
+
+            clearRouteBtn.addEventListener("click",function(){
+                routeList.innerHTML="";
+                selectedRoutes= [];
+            })
+
+        })
+    </script>
+
+
+</body>
+</html>
