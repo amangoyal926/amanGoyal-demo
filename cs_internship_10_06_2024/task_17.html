@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journey Planner</title>
+    <title>task_17</title>
     <style>
         .mainDiv {
             background-color: blanchedalmond;
@@ -18,7 +18,7 @@
             color: red;
         }
         .listDiv{
-            background-color: blanchedalmond;            
+            background-color: bisque;            
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -26,6 +26,8 @@
         ul {
             list-style: none;            
             }
+
+
     </style>
 </head>
 <body>
@@ -36,7 +38,7 @@
         <div>
             <label for="source">Source:</label>
             <select id="source">
-                <option disabled selected value >Select Source</option>
+                <option disabled selected value>Select Source</option>
                 <option value="Delhi">Delhi</option>
                 <option value="Mumbai">Mumbai</option>
                 <option value="Varanasi">Varanasi</option>
@@ -59,100 +61,122 @@
         <br>
         <div>
             <button id="addJourney">Add Journey</button>
-            <button id="clearRoute">Clear Route</button>
-        </div>        
+            <button id="clearRoute">Clear Route</button>            
+        </div>
     </div>
     <div class="listDiv">
         <ul id="routeList"></ul>
     </div>
-    
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sourceSelect = document.getElementById("source");
-            const destinationSelect = document.getElementById("destination");
-            const addJourneyBtn = document.getElementById('addJourney');
-            const clearRouteBtn = document.getElementById('clearRoute');
-            const routeList = document.getElementById('routeList');
-            const errorMessage = document.getElementById('error-message');
+        const sourceSelect = document.getElementById('source');
+        const destinationSelect = document.getElementById('destination');
+        const addJourneyButton = document.getElementById('addJourney');
+        const clearRouteButton = document.getElementById('clearRoute');
+        const errorMessage = document.getElementById('error-message');
+        const routeList = document.getElementById('routeList');
 
-            let selectedSources = [];
-            let selectedDestinations = [];
+        const routes = [];
 
-            function validateInput() {
-                const source = sourceSelect.value;
-                const destination = destinationSelect.value;
-                errorMessage.textContent = '';
-
-                if (!source || !destination) {
-                    errorMessage.textContent = 'Both source and destination must be selected.';
-                    return false;
-                }
-
-                if (source === destination) {
-                    errorMessage.textContent = 'Source and destination cannot be the same.';
-                    return false;
-                }
-
-                if (selectedSources.includes(source)) {
-                    errorMessage.textContent = 'Source has already been selected.';
-                    return false;
-                }
-
-                if (selectedDestinations.includes(destination)) {
-                    errorMessage.textContent = 'Destination has already been selected.';
-                    return false;
-                }
-
-                return true;
-            }
-
-            function updateOptions() {
-                for (let option of sourceSelect.options) {
-                    if (selectedSources.includes(option.value) && option.value !== '') {
-                        option.disabled = true;
-                    } else {
-                        option.disabled = false;
-                    }
-                }
-
-                for (let option of destinationSelect.options) {
-                    if (selectedDestinations.includes(option.value) && option.value !== '') {
-                        option.disabled = true;
-                    } else {
-                        option.disabled = false;
-                    }
-                }
-            }
-
-            sourceSelect.addEventListener("change", validateInput);
-            destinationSelect.addEventListener("change", validateInput);
-
-            addJourneyBtn.addEventListener("click", function () {
-                if (!validateInput()) return;
-
-                const source = sourceSelect.value;
-                const destination = destinationSelect.value;
-
-                selectedSources.push(source);
-                selectedDestinations.push(destination);
-                updateOptions();
-
-                const routeItem = document.createElement('li');
-                routeItem.textContent = `From ${source} to ${destination}`;
-                routeList.appendChild(routeItem);
-
-                
-            });
-
-            clearRouteBtn.addEventListener("click", function () {
-                routeList.innerHTML = "";
-                selectedSources = [];
-                selectedDestinations = [];
-                updateOptions();
-                
-            });
+        sourceSelect.addEventListener('change', () => {
+            updateDestinationOptions();
         });
+
+        destinationSelect.addEventListener('change', () => {
+            updateSourceOptions();
+        });
+
+        addJourneyButton.addEventListener('click', () => {
+            const source = sourceSelect.value;
+            const destination = destinationSelect.value;
+
+            if (!source || !destination || source === destination) {
+                errorMessage.textContent = 'Please select different cities for source and destination.';
+                return;
+            }
+
+            const route = `${source} to ${destination}`;
+            if (routes.includes(route)) {
+                errorMessage.textContent = 'This route already exists.';
+                return;
+            }
+
+            routes.push(route);
+            const listItem = document.createElement('li');
+            listItem.textContent = route;
+            routeList.appendChild(listItem);
+
+            resetDropdowns();
+            updateDestinationOptions();
+            updateSourceOptions();
+        });
+
+        clearRouteButton.addEventListener('click', () => {
+            routes.length = 0;
+            routeList.innerHTML = '';
+            resetDropdowns();
+            errorMessage.textContent = '';
+        });
+
+        function updateDestinationOptions() {
+            const selectedSource = sourceSelect.value;
+            // for (let option of destinationSelect.options) {
+            //     option.disabled = (option.value === selectedSource);
+            // }
+
+            // for (let option of sourceSelect.options) {
+            //     if (option.value === selectedDestination) {
+            //         option.disabled = true;
+            //     }
+            // }
+
+            // Enable all options first
+            for (let option of destinationSelect.options) {
+                option.disabled = false;
+            }
+
+            // Disable the selected source in the destination dropdown
+            for (let option of destinationSelect.options) {
+                if (option.value === selectedSource || routes.includes(`${selectedSource} to ${option.value}`)) {
+                    option.disabled = true;
+                }
+            }
+
+        }
+
+        function updateSourceOptions() {
+            const selectedDestination = destinationSelect.value;
+            // for (let option of sourceSelect.options) {
+            //     option.disabled = (option.value === selectedDestination);
+            // }
+
+            // for (let option of sourceSelect.options) {
+            //     if (option.value === selectedDestination) {
+            //         option.disabled = true;
+            //     }
+            // }
+
+            // Enable all options first
+            for (let option of sourceSelect.options) {
+                option.disabled = false;
+            }
+
+            // Disable the selected destination in the source dropdown
+            for (let option of sourceSelect.options) {
+                if (option.value === selectedDestination) {
+                    option.disabled = true;
+                }
+            }
+
+            
+
+        }
+
+        function resetDropdowns() {
+            sourceSelect.selectedIndex = 0;
+            destinationSelect.selectedIndex = 0;
+            errorMessage.textContent = '';
+        }
     </script>
 </body>
 </html>
