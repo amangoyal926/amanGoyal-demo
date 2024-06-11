@@ -13,6 +13,9 @@
             justify-content: center;
             text-align: center;
         }
+        .error{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -23,6 +26,7 @@
         <div>
             <label for="source">Source:</label>
         <select id="source">
+            <option value="">Select Source</option>
             <option value="Delhi">Delhi</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Varanasi">Varanasi</option>
@@ -32,6 +36,7 @@
         </select>
         <label for="destination">Destination:</label>
         <select id="destination">
+            <option value="">Select Destination</option>
             <option value="Delhi">Delhi</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Varanasi">Varanasi</option>
@@ -39,6 +44,7 @@
             <option value="Noida">Noida</option>
             <option value="Lucknow">Lucknow</option>
         </select>
+        <div id="error-message" class="error"></div>
         </div>
         <br>
         <div>
@@ -53,40 +59,56 @@
         document.addEventListener("DOMContentLoaded",function(){
             const sourceSelect = document.getElementById("source");
             const destinationSelect = document.getElementById("destination");
-            const addJourneyBtn = document.getElementById('addJourney');
-            const clearRouteBtn = document.getElementById('clearRoute');
-            const routeList = document.getElementById('routeList');
+            const addJourneyBtn = document.getElementById("addJourney");
+            const clearRouteBtn = document.getElementById("clearRoute");
+            const routeList = document.getElementById("routeList");
+            const errorMessage = document.getElementById("error-message");
 
             let selectedRoutes=[];
 
-            addJourneyBtn.addEventListener("click",function(){
-                const sourse = sourceSelect.value;
-                const destination = destinationSelect.value;
+            function validateInput(){
+                const source= sourceSelect.value;
+                const destination= destinationSelect.value;
+                errorMessage.textContent="";
 
-                if(sourse == destination){
-                    alert("Source and destination can't be the same");
-                    return;
+                if(!source || !destination){
+                    errorMessage.textContent = "Both source and destination must be selected";
+                    return false;
                 }
-
+                if(source == destination){
+                    errorMessage.textContent="Source and destination can't be the same";
+                    return false;
+                }
                 if(selectedRoutes.includes(destination)){
-                    alert("Destination has been already been selected");
-                    return;                    
+                    errorMessage.textContent="Destination has already been selected";
+                    return false;
                 }
+                return true;
+            }            
+
+            sourceSelect.addEventListener("change", validateInput);
+            destinationSelect.addEventListener("change", validateInput);
+
+            addJourneyBtn.addEventListener("click",function(){
+                if(!validateInput()) return;
+
+                const source = sourceSelect.value;
+                const destination = destinationSelect.value;
 
                 selectedRoutes.push(destination);
 
                 const routeItem = document.createElement('li');
-                routeItem.textContent = `From ${sourse} to ${destination}`;
+                routeItem.textContent = `From ${source} to ${destination}`;
                 routeList.appendChild(routeItem);
+
+                clearRouteBtn.addEventListener("click", function () {
+                routeList.innerHTML = "";
+                selectedRoutes = [];                
+            });
 
             });
 
-            clearRouteBtn.addEventListener("click",function(){
-                routeList.innerHTML="";
-                selectedRoutes= [];
-            })
-
-        })
+        });
     </script>
 
 
