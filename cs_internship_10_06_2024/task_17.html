@@ -116,6 +116,12 @@
             routeList.innerHTML = '';
             resetDropdowns();
             errorMessage.textContent = '';
+            for (let option of destinationSelect.options) {
+                option.disabled = false;
+            }
+            for (let option of sourceSelect.options) {
+                option.disabled = false;
+            }
         });
 
         function updateDestinationOptions() {
@@ -163,7 +169,7 @@
 
             // Disable the selected destination in the source dropdown
             for (let option of sourceSelect.options) {
-                if (option.value === selectedDestination) {
+                if (option.value === selectedDestination || routes.includes(`${option.value} to ${selectedDestination}`)) {
                     option.disabled = true;
                 }
             }
