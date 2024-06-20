@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+    <div id="product-details">
+        <img id="product-image" style="width:300px" src="" alt="">
+        <h3 id="product-name"></h3>
+        <p id="product-price"></p>
+        <!-- <p id="product-description"></p> -->
+        <p id="product-breaf"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const product = {
+                image: urlParams.get('image'),
+                name: urlParams.get('name'),
+                price: urlParams.get('price'),
+                // description: urlParams.get('description'),
+                breaf: urlParams.get('breaf')
+            };
+
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = product.price;
+            // document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-breaf').textContent = product.breaf;
+        });
+    </script>
+</body>
+</html>
